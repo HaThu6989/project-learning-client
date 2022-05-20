@@ -1,0 +1,55 @@
+/* Auth css */
+.Auth {
+	position: relative;
+	background: url('./assets/ironhackers.avif');
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+.background-overlay {
+	background-color: rgba(0, 0, 0, 0.5);
+	height: 100%;
+}
+
+.h1overlay {
+	background-color: rgba(0, 16, 68, 0.5);
+	border-radius: 20px;
+}
+
+.Auth-form {
+	height: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.Auth-form form {
+	width: 25%;
+}
+
+.Auth-form h1,
+.Auth-form h3,
+.Auth-form p {
+	color: white;
+}
+
+.spinner-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+body{
+	position: relative;
+	/* background: url('./assets/learning-background.jpg'); */
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
