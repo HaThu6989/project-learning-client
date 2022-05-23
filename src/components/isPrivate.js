@@ -16,7 +16,7 @@ function IsPrivate(props) {
     );
   } else if (!isLoggedIn) {
     return <Navigate to="/login" />;
-  } else if (isLoggedIn) {
+  } else {
     return props.children;
   }
 }

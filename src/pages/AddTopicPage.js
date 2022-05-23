@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Navbar from "../components/Navbar";
+import NavbarMenu from "../components/NavbarMenu";
+import Container from "react-bootstrap/esm/Container";
 
 function AddTopicPage(props) {
   const [title, setTitle] = useState("");
@@ -35,34 +36,36 @@ function AddTopicPage(props) {
 
   return (
     <section>
-      <Navbar />
-      <h1>Create a new topic</h1>
+      <NavbarMenu />
+      <Container className="my-4">
+        <h1>Create a new topic</h1>
 
-      <Form className="my-4" onSubmit={handleSubmit}>
-        <Form.Group className="my-4">
-          <Form.Label>Title</Form.Label>
-          <Form.Control
-            type="text"
-            name="title"
-            value={title}
-            required={true}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            type="text"
-            name="description"
-            value={description}
-            required={true}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant="success" type="submit" className="my-2">
-          Create
-        </Button>
-      </Form>
+        <Form className="my-4" onSubmit={handleSubmit}>
+          <Form.Group className="my-4">
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              type="text"
+              name="title"
+              value={title}
+              required={true}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group className="my-4">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              name="description"
+              value={description}
+              required={true}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="success" type="submit" className="my-2">
+            Create !
+          </Button>
+        </Form>
+      </Container>
     </section>
   );
 }

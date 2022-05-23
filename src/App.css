@@ -12,6 +12,11 @@
 	height: 100%;
 }
 
+.background-overlay-landing{
+	background-color: rgba(193, 234, 221, 0.5);
+	border-radius: 20px;
+}
+
 .h1overlay {
 	background-color: rgba(0, 16, 68, 0.5);
 	border-radius: 20px;
@@ -48,8 +53,8 @@
 
 body{
 	position: relative;
-	/* background: url('./assets/learning-background.jpg'); */
+	background: url('./assets/110342-beige-blurred-background-vector.webp');
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 100vh;
+	/* height: 100vh; */
 }

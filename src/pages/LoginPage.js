@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import { AuthContext } from "../context/auth.context";
-import Navbar from "../components/Navbar";
+import NavbarMenu from "../components/NavbarMenu";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -44,7 +44,6 @@ function LoginPage() {
     <div className="Auth">
       <div className="background-overlay">
         <div className="Auth-form">
-          <Navbar />
           <div className="h1overlay p-4 text-light">
             <h1 className="display-4"> BY YOUR WAY</h1>
             <h2 className="text-info">Keep track of what you are learning</h2>
@@ -81,6 +80,15 @@ function LoginPage() {
             <Link to="/signup">
               <Button variant="info" size="sm" className="ml-2">
                 Register
+              </Button>
+            </Link>
+          </p>
+
+          <p>
+            Come back Homepage ?
+            <Link to="/">
+              <Button variant="info" size="sm" className="ml-2">
+                Home
               </Button>
             </Link>
           </p>

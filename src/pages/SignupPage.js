@@ -3,9 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Navbar from "../components/Navbar";
 
-function SignupPage() {
+function SignupPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +19,7 @@ function SignupPage() {
 
     axios
       .post(`http://localhost:5005/api/auth/signup`, requestBody)
-      .then(() => {
+      .then((response) => {
         navigate("/login");
       })
       .catch((error) => {
@@ -35,7 +34,6 @@ function SignupPage() {
     <div className="Auth">
       <div className="background-overlay">
         <div className="Auth-form">
-          <Navbar />
           <div className="h1overlay p-4 text-light">
             <h1 className="display-4"> BY YOUR WAY</h1>
             <h2 className="text-info">Keep track of what you are learning</h2>
@@ -71,6 +69,14 @@ function SignupPage() {
             <Link to="/login">
               <Button variant="info" size="sm" className="ml-2">
                 Login
+              </Button>
+            </Link>
+          </p>
+          <p>
+            Come back Homepage ?
+            <Link to="/">
+              <Button variant="info" size="sm" className="ml-2">
+                Home
               </Button>
             </Link>
           </p>

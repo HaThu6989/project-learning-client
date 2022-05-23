@@ -4,43 +4,52 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import NavbarMenu from "../components/NavbarMenu";
+import { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 
-function EditTopicPage(props) {
+function EditLessonPage(props) {
   const navigate = useNavigate();
+  const { lessonId } = useParams();
+  console.log(lessonId);
 
-  const { topicId } = useParams();
+  const lessonDetails = props.topic.lessons.find(
+    (lesson) => lesson._id == lessonId
+  );
+  console.log(lessonDetails);
+  const [title, setTitle] = useState(lessonDetails.title);
+  const [description, setDescription] = useState(lessonDetails.description);
 
-  const topicDetails = props.topics.find((topic) => topic._id === topicId);
-
-  const [title, setTitle] = useState(topicDetails.title);
-  const [description, setDescription] = useState(topicDetails.description);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/lessons/${lessonId}`)
+      .then((response) => {
+        console.log(response.data);
+        setTitle(response.data.title);
+        setDescription(response.data.description);
+      })
+      .catch((error) => console.log(error));
+  }, [lessonId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const newLessonUpdate = { title, description };
 
-    const newDetails = {
-      title,
-      description,
-    };
-
-    const storedToken = localStorage.getItem("authToken");
     axios
-      .put(`${process.env.REACT_APP_API_URL}/topics/${topicId}`, newDetails, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
+      .put(
+        `${process.env.REACT_APP_API_URL}/lessons/${lessonId}`,
+        newLessonUpdate
+      )
       .then((response) => {
-        props.callbackUpdateTopicList();
-        navigate("/topics");
-      })
-      .catch((e) => console.log("error updating Topic...", e));
+        // navigate(`/topics/${topicId}`);
+        navigate(`/topics`);
+      });
   };
 
   return (
-    <section className="">
+    <>
       <NavbarMenu />
       <Container className="my-4">
-        <h1>Edit Topic</h1>
+        <h1>Edit Lesson</h1>
 
         <Form className="my-4" onSubmit={handleSubmit}>
           <Form.Group className="my-4">
@@ -68,8 +77,8 @@ function EditTopicPage(props) {
           </Button>
         </Form>
       </Container>
-    </section>
+    </>
   );
 }
 
-export default EditTopicPage;
+export default EditLessonPage;

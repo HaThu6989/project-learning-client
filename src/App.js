@@ -9,16 +9,15 @@ import EditTopicPage from "./pages/EditTopicPage";
 import IsPrivate from "./components/isPrivate";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-// import Navbar from "./components/Navbar";
+import TopicDetailsPage from "./pages/TopicDetailPage";
+import EditLessonPage from "./pages/EditLessonPage";
+import { useParams, Link } from "react-router-dom";
+// import NavbarMenu from "./components/NavbarMenu";
 
 function App() {
-  const [topics, setTopics] = useState(null);
+  const [topics, setTopics] = useState([]);
 
-  useEffect(() => {
-    fetchTopics();
-  }, []);
-
-  const fetchTopics = () => {
+  const getAllTopics = () => {
     const storedToken = localStorage.getItem("authToken");
     axios
       .get(`${process.env.REACT_APP_API_URL}/topics`, {
@@ -33,6 +32,27 @@ function App() {
       );
   };
 
+  useEffect(() => {
+    getAllTopics();
+  }, []);
+
+  const [topic, setTopic] = useState(null);
+  const { topicId } = useParams();
+
+  const getOneTopic = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/topics/${topicId}`)
+      .then((response) => {
+        const oneTopic = response.data;
+        setTopic(oneTopic);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getOneTopic();
+  }, []);
+
   return (
     <div className="App">
       <Routes>
@@ -44,7 +64,7 @@ function App() {
             <IsPrivate>
               <TopicListPage
                 topics={topics}
-                callbackUpdateTopicList={fetchTopics}
+                callbackUpdateTopicList={getAllTopics}
               />
             </IsPrivate>
           }
@@ -53,7 +73,7 @@ function App() {
           path="/topics/create"
           element={
             <IsPrivate>
-              <AddTopicPage callbackUpdateTopicList={fetchTopics} />
+              <AddTopicPage callbackUpdateTopicList={getAllTopics} />
             </IsPrivate>
           }
         />
@@ -64,10 +84,16 @@ function App() {
             <IsPrivate>
               <EditTopicPage
                 topics={topics}
-                callbackUpdateTopicList={fetchTopics}
+                callbackUpdateTopicList={getAllTopics}
               />
             </IsPrivate>
           }
+        />
+
+        <Route path="/topics/:topicId" element={<TopicDetailsPage />} />
+        <Route
+          path="/lessons/:lessonId/edit"
+          element={<EditLessonPage topic={topic} />}
         />
 
         <Route path="/signup" element={<SignupPage />} />
