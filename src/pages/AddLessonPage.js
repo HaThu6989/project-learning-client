@@ -80,7 +80,7 @@ function AddLessonPage(props) {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Creat!
+          Creat !
         </Button>
       </Form>
     </Container>

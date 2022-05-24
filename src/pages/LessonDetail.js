@@ -1,7 +1,8 @@
 import axios from "axios";
-import Button from "react-bootstrap/Button";
-import Nav from "react-bootstrap/Nav";
-import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Badge from "react-bootstrap/Badge";
 
 function LessonDetail(props) {
   const deleteLesson = (lessonId) => {
@@ -14,24 +15,45 @@ function LessonDetail(props) {
   };
 
   return (
-    <div className="">
-      <h3>Title: {props.title}</h3>
-      <p>Id: {props._id}</p>
-      <p>Description: {props.description}</p>
-      <p>URL: {props.url}</p>
-      <p>Status: {props.status}</p>
-      <Nav.Link
-        className="btn-floating"
-        to={`/lessons/${props._id}/edit`}
-        as={Link}
-      >
-        Edit Lesson
-      </Nav.Link>
-
-      <Button className="btn-floating" onClick={() => deleteLesson(props._id)}>
-        Delete
-      </Button>
-    </div>
+    <Card
+      className="shadow my-4"
+      border={
+        props.status === "LEARNED"
+          ? "success"
+          : props.status === "LEARNING"
+          ? "warning"
+          : "danger"
+      }
+    >
+      <Card.Body>
+        <Card.Title>
+          <Row>
+            <Col>
+              <p className="mb-3 smaller-input">{props.title}</p>
+              <Badge
+                className="p-2"
+                pill
+                bg={
+                  props.status === "LEARNED"
+                    ? "success"
+                    : props.status === "LEARNING"
+                    ? "warning"
+                    : "danger"
+                }
+              >
+                {props.status}
+              </Badge>
+            </Col>
+            <Col className="text-right">
+              <p>
+                URL : <a href={props.url}>{props.url}</a>
+              </p>
+            </Col>
+          </Row>
+        </Card.Title>
+        <Card.Text>{props.description}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 

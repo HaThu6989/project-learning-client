@@ -8,16 +8,18 @@ import { useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 
 function EditLessonPage(props) {
+  const { lessons } = props;
+  console.log("props", props);
   const navigate = useNavigate();
   const { lessonId } = useParams();
-  console.log(lessonId);
-
-  const lessonDetails = props.topic.lessons.find(
-    (lesson) => lesson._id == lessonId
-  );
-  console.log(lessonDetails);
-  const [title, setTitle] = useState(lessonDetails.title);
-  const [description, setDescription] = useState(lessonDetails.description);
+  console.log("lesson Id", lessonId);
+  console.log("THIS IS PROPS.LESSONS", lessons);
+  const lessonDetails = lessons.find((lesson) => lesson._id === lessonId);
+  console.log("lessonDetails", lessonDetails);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [url, setUrl] = useState(null);
+  const [status, setStatus] = useState([]);
 
   useEffect(() => {
     axios
@@ -26,13 +28,15 @@ function EditLessonPage(props) {
         console.log(response.data);
         setTitle(response.data.title);
         setDescription(response.data.description);
+        setUrl(response.data.url);
+        setStatus(response.data.status);
       })
       .catch((error) => console.log(error));
   }, [lessonId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newLessonUpdate = { title, description };
+    const newLessonUpdate = { title, description, url, status };
 
     axios
       .put(
@@ -40,16 +44,20 @@ function EditLessonPage(props) {
         newLessonUpdate
       )
       .then((response) => {
-        // navigate(`/topics/${topicId}`);
-        navigate(`/topics`);
+        navigate(`/topics/${lessonDetails.topic}`);
+        // navigate(`/topics`);
       });
   };
+
+  if (title === null) {
+    return <h1>Loading ...</h1>;
+  }
 
   return (
     <>
       <NavbarMenu />
       <Container className="my-4">
-        <h1>Edit Lesson</h1>
+        <h3>Edit Lesson</h3>
 
         <Form className="my-4" onSubmit={handleSubmit}>
           <Form.Group className="my-4">
@@ -57,20 +65,45 @@ function EditLessonPage(props) {
             <Form.Control
               type="text"
               name="title"
-              value={title}
-              required={true}
+              defaultValue={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </Form.Group>
+
           <Form.Group className="my-4">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
+              rows={3}
               name="description"
               value={description}
-              required={true}
               onChange={(e) => setDescription(e.target.value)}
             />
+          </Form.Group>
+
+          <Form.Group className="my-4">
+            <Form.Label>URL</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Youtube Tutorial URL"
+              name="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group className="my-4">
+            <Form.Label>Status</Form.Label>
+            <Form.Control
+              as="select"
+              value={status}
+              name="status"
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="TO LEARN">TO LEARN</option>
+              <option value="LEARNING">LEARNING</option>
+              <option value="LEARNED">LEARNED</option>
+            </Form.Control>
           </Form.Group>
           <Button variant="success" type="submit" className="my-2">
             Update !

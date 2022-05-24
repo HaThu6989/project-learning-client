@@ -11,11 +11,15 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import TopicDetailsPage from "./pages/TopicDetailPage";
 import EditLessonPage from "./pages/EditLessonPage";
-import { useParams, Link } from "react-router-dom";
-// import NavbarMenu from "./components/NavbarMenu";
 
 function App() {
   const [topics, setTopics] = useState([]);
+  const [lessons, setLessons] = useState([]);
+
+  useEffect(() => {
+    getAllTopics();
+    getAllLesson();
+  }, []);
 
   const getAllTopics = () => {
     const storedToken = localStorage.getItem("authToken");
@@ -32,26 +36,18 @@ function App() {
       );
   };
 
-  useEffect(() => {
-    getAllTopics();
-  }, []);
-
-  const [topic, setTopic] = useState(null);
-  const { topicId } = useParams();
-
-  const getOneTopic = () => {
+  const getAllLesson = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${process.env.REACT_APP_API_URL}/topics/${topicId}`)
+      .get(`${process.env.REACT_APP_API_URL}/lessons`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
-        const oneTopic = response.data;
-        setTopic(oneTopic);
+        console.log("lessons in request", response.data);
+        setLessons(response.data);
       })
       .catch((error) => console.log(error));
   };
-
-  useEffect(() => {
-    getOneTopic();
-  }, []);
 
   return (
     <div className="App">
@@ -90,10 +86,11 @@ function App() {
           }
         />
 
-        <Route path="/topics/:topicId" element={<TopicDetailsPage />} />
+        <Route path="/topics/:topicId/*" element={<TopicDetailsPage />} />
+
         <Route
           path="/lessons/:lessonId/edit"
-          element={<EditLessonPage topic={topic} />}
+          element={<EditLessonPage topics={topics} lessons={lessons} />}
         />
 
         <Route path="/signup" element={<SignupPage />} />

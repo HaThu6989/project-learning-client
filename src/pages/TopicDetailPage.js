@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavbarMenu from "../components/NavbarMenu";
 import AddLessonPage from "./AddLessonPage";
@@ -32,8 +32,8 @@ function TopicDetailsPage(props) {
         <Container className="mt-4">
           {topic && (
             <>
-              <h1>Title of Topic : {topic.title}</h1>
-              <p>Description of Topic : {topic.description}</p>
+              <h1>Topic : {topic.title}</h1>
+              <p>{topic.description}</p>
             </>
           )}
           <br />
@@ -43,7 +43,12 @@ function TopicDetailsPage(props) {
             topic.lessons.map((lesson) => (
               <LessonDetail
                 key={lesson._id}
-                {...lesson}
+                topicId={topicId}
+                title={lesson.title}
+                description={lesson.description}
+                url={lesson.url}
+                status={lesson.status}
+                _id={lesson._id}
                 updateTopic={getOneTopic}
               />
             ))}
