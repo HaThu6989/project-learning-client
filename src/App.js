@@ -28,7 +28,7 @@ function App() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log("topics in request", response.data);
+        // console.log("topics in request", response.data);
         setTopics(response.data);
       })
       .catch((e) =>
@@ -43,7 +43,7 @@ function App() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log("lessons in request", response.data);
+        // console.log("lessons in request", response.data);
         setLessons(response.data);
       })
       .catch((error) => console.log(error));
@@ -86,7 +86,10 @@ function App() {
           }
         />
 
-        <Route path="/topics/:topicId" element={<TopicDetailsPage />} />
+        <Route
+          path="/topics/:topicId"
+          element={<TopicDetailsPage topics={topics} lessons={lessons} />}
+        />
 
         <Route
           path="/lessons/:lessonId/edit"

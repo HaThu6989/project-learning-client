@@ -6,10 +6,17 @@ import AddLessonPage from "./AddLessonPage";
 import LessonDetail from "./LessonDetail";
 import Container from "react-bootstrap/esm/Container";
 import IsPrivate from "../components/isPrivate";
+import InputGroup from "react-bootstrap/esm/InputGroup";
+import FormControl from "react-bootstrap/esm/FormControl";
 
 function TopicDetailsPage(props) {
   const [topic, setTopic] = useState(null);
   const { topicId } = useParams();
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const getOneTopic = () => {
     axios
@@ -39,19 +46,41 @@ function TopicDetailsPage(props) {
           <br />
           <AddLessonPage updateTopic={getOneTopic} topicId={topicId} />
 
+          <InputGroup className="my-3">
+            <FormControl
+              type="text"
+              placeholder="Search Your Lesson "
+              value={searchTerm}
+              onChange={handleChange}
+            />
+          </InputGroup>
+          {/* <div className="">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={handleChange}
+            />
+          </div> */}
+
           {topic &&
-            topic.lessons.map((lesson) => (
-              <LessonDetail
-                key={lesson._id}
-                topicId={topicId}
-                title={lesson.title}
-                description={lesson.description}
-                url={lesson.url}
-                status={lesson.status}
-                _id={lesson._id}
-                updateTopic={getOneTopic}
-              />
-            ))}
+            topic.lessons
+              .filter((lesson) => {
+                const lowerFilter = searchTerm.toLowerCase();
+                return lesson.title.toLowerCase().includes(lowerFilter);
+              })
+              .map((lesson) => (
+                <LessonDetail
+                  key={lesson._id}
+                  topicId={topicId}
+                  title={lesson.title}
+                  description={lesson.description}
+                  url={lesson.url}
+                  status={lesson.status}
+                  _id={lesson._id}
+                  updateTopic={getOneTopic}
+                />
+              ))}
         </Container>
       </IsPrivate>
     </div>
