@@ -68,6 +68,7 @@ function TopicDetailsPage(props) {
                 const lowerFilter = searchTerm.toLowerCase();
                 return lesson.title.toLowerCase().includes(lowerFilter);
               })
+              .sort((a, b) => a.title.localeCompare(b.title))
               .map((lesson) => (
                 <LessonDetail
                   key={lesson._id}
