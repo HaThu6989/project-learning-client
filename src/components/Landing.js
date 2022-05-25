@@ -17,7 +17,7 @@ function Landing() {
       <Container className="my-4 mb-3 p-3 background-overlay-landing">
         <Row className="justify-content-center text-center ">
           <Col md="auto">
-            <h1 className="mb-3">Website For E-Learning</h1>
+            <h1 className="mb-3">Website For Learning Tracker</h1>
             <p className="">
               By educators, for educators. We are the most trusted web
               publishing platform to keep track of what you are learning.

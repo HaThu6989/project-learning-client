@@ -36,14 +36,13 @@ function TopicDetailsPage(props) {
     <div className="TopicDetails">
       <NavbarMenu />
       <IsPrivate>
-        <Container className="mt-4">
+        <Container className="my-4">
           {topic && (
             <>
               <h1 className="font-link text-uppercase">{topic.title}</h1>
               <p className="font-italic">{topic.description}</p>
             </>
           )}
-          <br />
           <AddLessonPage updateTopic={getOneTopic} topicId={topicId} />
 
           <InputGroup className="my-3">
