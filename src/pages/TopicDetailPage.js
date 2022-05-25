@@ -32,8 +32,8 @@ function TopicDetailsPage(props) {
         <Container className="mt-4">
           {topic && (
             <>
-              <h1>Topic : {topic.title}</h1>
-              <p>{topic.description}</p>
+              <h1 className="font-link text-uppercase">{topic.title}</h1>
+              <p className="font-italic">{topic.description}</p>
             </>
           )}
           <br />

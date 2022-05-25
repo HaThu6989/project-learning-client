@@ -1,3 +1,22 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Permanent+Marker&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Kranky&family=Permanent+Marker&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Kranky&family=Mali:wght@700&family=Permanent+Marker&display=swap');
+
+
+.font-linkListTopic {
+	/* font-family: 'Fredericka the Great', cursive;*/
+	color: rgb(3, 68, 61); 
+	font-family: 'Kranky', cursive;
+}
+
+.font-link {
+	/* font-family: 'Fredericka the Great', cursive;*/
+	color: rgb(3, 68, 61); 
+	font-family: 'Mali', cursive;
+}
+
 /* Auth css */
 .Auth {
 	position: relative;
@@ -58,3 +77,23 @@ body{
 	background-size: cover;
 	/* height: 100vh; */
 }
+
+.cardOneLesson{
+	border-width:2px; 
+}
+
+.btn-floating {
+	/* position: fixed; */
+	/* right: 3rem;
+	bottom: 3rem; */
+	background: transparent;
+	border: none;
+	padding-top: 0;
+}
+
+.post-button {
+	padding-top: 0;
+	background: transparent;
+	border: none;
+}
+

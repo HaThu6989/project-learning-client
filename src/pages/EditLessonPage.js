@@ -5,17 +5,18 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import NavbarMenu from "../components/NavbarMenu";
 import { useEffect } from "react";
+import Card from "react-bootstrap/esm/Card";
 import Container from "react-bootstrap/esm/Container";
 
 function EditLessonPage(props) {
   const { lessons } = props;
-  console.log("props", props);
+  // console.log("props", props);
   const navigate = useNavigate();
   const { lessonId } = useParams();
-  console.log("lesson Id", lessonId);
-  console.log("THIS IS PROPS.LESSONS", lessons);
+  // console.log("lesson Id", lessonId);
+  // console.log("THIS IS PROPS.LESSONS", lessons);
   const lessonDetails = lessons.find((lesson) => lesson._id === lessonId);
-  console.log("lessonDetails", lessonDetails);
+  // console.log("lessonDetails", lessonDetails);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [url, setUrl] = useState(null);
@@ -25,7 +26,7 @@ function EditLessonPage(props) {
     axios
       .get(`${process.env.REACT_APP_API_URL}/lessons/${lessonId}`)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setTitle(response.data.title);
         setDescription(response.data.description);
         setUrl(response.data.url);
@@ -44,7 +45,8 @@ function EditLessonPage(props) {
         newLessonUpdate
       )
       .then((response) => {
-        navigate(`/topics/${lessonDetails.topic}`);
+        console.log(response.data);
+        navigate(`/topics/${response.data.topic}`);
         // navigate(`/topics`);
       });
   };
@@ -56,59 +58,65 @@ function EditLessonPage(props) {
   return (
     <>
       <NavbarMenu />
+
       <Container className="my-4">
-        <h3>Edit Lesson</h3>
+        <Card>
+          <Card.Header as="h5">Edit Lesson</Card.Header>
+          <Card.Body>
+            <Card.Text>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    defaultValue={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </Form.Group>
 
-        <Form className="my-4" onSubmit={handleSubmit}>
-          <Form.Group className="my-4">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              name="title"
-              defaultValue={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Form.Group>
+                <Form.Group className="my-4">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    name="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </Form.Group>
 
-          <Form.Group className="my-4">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              name="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Group>
+                <Form.Group className="my-4">
+                  <Form.Label>URL</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Youtube Tutorial URL"
+                    name="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                  />
+                </Form.Group>
 
-          <Form.Group className="my-4">
-            <Form.Label>URL</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Youtube Tutorial URL"
-              name="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group className="my-4">
-            <Form.Label>Status</Form.Label>
-            <Form.Control
-              as="select"
-              value={status}
-              name="status"
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="TO LEARN">TO LEARN</option>
-              <option value="LEARNING">LEARNING</option>
-              <option value="LEARNED">LEARNED</option>
-            </Form.Control>
-          </Form.Group>
-          <Button variant="success" type="submit" className="my-2">
-            Update !
-          </Button>
-        </Form>
+                <Form.Group className="my-4">
+                  <Form.Label>Status</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={status}
+                    name="status"
+                    onChange={(e) => setStatus(e.target.value)}
+                  >
+                    <option value="TO LEARN">TO LEARN</option>
+                    <option value="LEARNING">LEARNING</option>
+                    <option value="LEARNED">LEARNED</option>
+                  </Form.Control>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Update !
+                </Button>
+              </Form>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </Container>
     </>
   );

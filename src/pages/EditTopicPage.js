@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import NavbarMenu from "../components/NavbarMenu";
 import Container from "react-bootstrap/esm/Container";
+import Card from "react-bootstrap/esm/Card";
 
 function EditTopicPage(props) {
   const navigate = useNavigate();
@@ -37,38 +38,49 @@ function EditTopicPage(props) {
   };
 
   return (
-    <section className="">
+    <>
       <NavbarMenu />
-      <Container className="my-4">
-        <h1>Edit Topic</h1>
 
-        <Form className="my-4" onSubmit={handleSubmit}>
-          <Form.Group className="my-4">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              name="title"
-              value={title}
-              required={true}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group className="my-4">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              type="text"
-              name="description"
-              value={description}
-              required={true}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Group>
-          <Button variant="success" type="submit" className="my-2">
-            Update !
-          </Button>
-        </Form>
+      <Container className="my-4">
+        <Card>
+          <Card.Header as="h5">Edit Topic</Card.Header>
+          <Card.Body>
+            <Card.Text>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={title}
+                    required={true}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="my-4">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Description"
+                    name="description"
+                    value={description}
+                    required={true}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </Form.Group>
+                <Button variant="success" type="submit" className="my-2">
+                  Update !
+                </Button>
+              </Form>
+            </Card.Text>
+            {/* <Button variant="primary" type="submit">
+              Update !
+            </Button> */}
+          </Card.Body>
+        </Card>
       </Container>
-    </section>
+    </>
   );
 }
 

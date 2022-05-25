@@ -86,7 +86,7 @@ function App() {
           }
         />
 
-        <Route path="/topics/:topicId/*" element={<TopicDetailsPage />} />
+        <Route path="/topics/:topicId" element={<TopicDetailsPage />} />
 
         <Route
           path="/lessons/:lessonId/edit"
