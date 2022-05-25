@@ -1,14 +1,15 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Permanent+Marker&display=swap'); */
 
-@import url('https://fonts.googleapis.com/css2?family=Kranky&family=Permanent+Marker&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Kranky&family=Permanent+Marker&display=swap'); */
 
 @import url('https://fonts.googleapis.com/css2?family=Kranky&family=Mali:wght@700&family=Permanent+Marker&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Kranky&family=Luckiest+Guy&family=Mali:wght@700&family=Permanent+Marker&display=swap');
 
 .font-linkListTopic {
 	/* font-family: 'Fredericka the Great', cursive;*/
 	color: rgb(3, 68, 61); 
-	font-family: 'Kranky', cursive;
+	font-family: 'Luckiest Guy', cursive;
 }
 
 .font-link {
@@ -75,7 +76,7 @@ body{
 	background: url('./assets/110342-beige-blurred-background-vector.webp');
 	background-repeat: no-repeat;
 	background-size: cover;
-	/* height: 100vh; */
+	min-height: 100vh;
 }
 
 .cardOneLesson{
@@ -97,3 +98,6 @@ body{
 	border: none;
 }
 
+.carousel-item {
+	margin: 0 auto 
+}
