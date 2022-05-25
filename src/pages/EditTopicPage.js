@@ -74,9 +74,6 @@ function EditTopicPage(props) {
                 </Button>
               </Form>
             </Card.Text>
-            {/* <Button variant="primary" type="submit">
-              Update !
-            </Button> */}
           </Card.Body>
         </Card>
       </Container>

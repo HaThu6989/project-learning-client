@@ -47,7 +47,6 @@ function EditLessonPage(props) {
       .then((response) => {
         console.log(response.data);
         navigate(`/topics/${response.data.topic}`);
-        // navigate(`/topics`);
       });
   };
 

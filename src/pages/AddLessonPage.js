@@ -4,12 +4,14 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
 
 function AddLessonPage(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState([]);
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
@@ -30,6 +32,7 @@ function AddLessonPage(props) {
         setUrl("");
         setStatus("");
         props.updateTopic();
+        // navigate(`/topics/${topicId}`);
       })
       .catch((error) => console.log(error));
   };
@@ -48,9 +51,8 @@ function AddLessonPage(props) {
         <Modal.Header closeButton>
           <Modal.Title>What do you want to learn?</Modal.Title>
         </Modal.Header>
-
-        <Modal.Body>
-          <Form className="my-4" onSubmit={handleSubmit}>
+        <Form className="my-4" onSubmit={handleSubmit}>
+          <Modal.Body>
             <Form.Group className="my-2">
               <Form.Label>Title</Form.Label>
               <Form.Control
@@ -98,21 +100,17 @@ function AddLessonPage(props) {
                 <option value="LEARNED">LEARNED</option>
               </Form.Control>
             </Form.Group>
+          </Modal.Body>
 
-            {/* <Button variant="primary" type="submit">
-              Creat!
-            </Button> */}
-          </Form>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" type="submit">
-            Creat !
-          </Button>
-        </Modal.Footer>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" onClick={handleClose}>
+              Creat !
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </Container>
   );
