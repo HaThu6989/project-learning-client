@@ -60,7 +60,9 @@ function EditLessonPage(props) {
 
       <Container className="my-4">
         <Card>
-          <Card.Header as="h5">Edit Lesson</Card.Header>
+          <Card.Header as="h2" className="font-link">
+            Edit Lesson
+          </Card.Header>
           <Card.Body>
             <Card.Text>
               <Form onSubmit={handleSubmit}>

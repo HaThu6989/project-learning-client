@@ -43,7 +43,9 @@ function EditTopicPage(props) {
 
       <Container className="my-4">
         <Card>
-          <Card.Header as="h5">Edit Topic</Card.Header>
+          <Card.Header as="h2" className="font-link">
+            Edit Topic
+          </Card.Header>
           <Card.Body>
             <Card.Text>
               <Form onSubmit={handleSubmit}>

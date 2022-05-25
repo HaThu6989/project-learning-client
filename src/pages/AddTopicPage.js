@@ -41,7 +41,9 @@ function AddTopicPage(props) {
 
       <Container className="my-4">
         <Card>
-          <Card.Header as="h5">Create new Topic</Card.Header>
+          <Card.Header as="h2" className="font-link">
+            Create New Topic
+          </Card.Header>
           <Card.Body>
             <Card.Text>
               <Form onSubmit={handleSubmit}>

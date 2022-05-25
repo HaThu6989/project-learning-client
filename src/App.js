@@ -13,8 +13,8 @@ import TopicDetailsPage from "./pages/TopicDetailPage";
 import EditLessonPage from "./pages/EditLessonPage";
 
 function App() {
-  const [topics, setTopics] = useState([]);
-  const [lessons, setLessons] = useState([]);
+  const [topics, setTopics] = useState(null);
+  const [lessons, setLessons] = useState(null);
 
   useEffect(() => {
     getAllTopics();
