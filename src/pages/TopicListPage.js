@@ -22,61 +22,70 @@ function TopicListPage(props) {
       .catch((e) => console.log("error deleting Topic...", e));
   };
 
-  let body = (
-    <Container className="mt-4">
-      <h1 className="mb-3 font-linkListTopic ">LIST OF YOUR TOPICS</h1>
-      <Row>
-        {props.topics.map((elm) => (
-          <Col key={elm._id} className="my-2" xs lg="3">
-            <Card className="shadow" border="success">
-              <Card.Body className="p-3">
-                <Card.Title>
-                  <p className="post-title">{elm.title}</p>
-                </Card.Title>
-                <Card.Text>
-                  <Row className="cols-md-4 mt-3 ml-5">
-                    <Col className="text-right col col-lg-4">
-                      <Nav.Link
-                        className="post-button"
-                        to={`/topics/${elm._id}`}
-                        as={Link}
-                      >
-                        <img src="https://img.icons8.com/ios/30/000000/details-pane.png" />
-                      </Nav.Link>
-                    </Col>
+  const renderTopics = () => {
+    props.callbackUpdateTopicList();
+    const body = (
+      <Container className="mt-4">
+        <h1 className="mb-3 font-linkListTopic ">LIST OF YOUR TOPICS</h1>
+        <Row>
+          {props.topics.map((elm) => (
+            <Col key={elm._id} className="my-2" xs lg="3">
+              <Card className="shadow" border="success">
+                <Card.Body className="p-3">
+                  <Card.Title>
+                    <p className="post-title">{elm.title}</p>
+                  </Card.Title>
+                  <Card.Text>
+                    <Row className="cols-md-4 mt-3 ml-5">
+                      <Col className="text-right col col-lg-4">
+                        <Nav.Link
+                          className="post-button"
+                          to={`/topics/${elm._id}`}
+                          as={Link}
+                        >
+                          <img src="https://img.icons8.com/ios/30/000000/details-pane.png" />
+                        </Nav.Link>
+                      </Col>
 
-                    <Col className="text-right col col-lg-4">
-                      <Nav.Link
-                        className="post-button"
-                        to={`/topics/${elm._id}/edit`}
-                        as={Link}
-                      >
-                        <img src={editIcon} alt="edit" width="24" height="24" />
-                      </Nav.Link>
-                    </Col>
+                      <Col className="text-right col col-lg-4">
+                        <Nav.Link
+                          className="post-button"
+                          to={`/topics/${elm._id}/edit`}
+                          as={Link}
+                        >
+                          <img
+                            src={editIcon}
+                            alt="edit"
+                            width="24"
+                            height="24"
+                          />
+                        </Nav.Link>
+                      </Col>
 
-                    <Col className="text-right col col-lg-4">
-                      <Button
-                        className="post-button"
-                        onClick={() => deleteTopic(elm._id)}
-                      >
-                        <img
-                          src={deleteIcon}
-                          alt="delete"
-                          width="24"
-                          height="24"
-                        />
-                      </Button>
-                    </Col>
-                  </Row>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
-  );
+                      <Col className="text-right col col-lg-4">
+                        <Button
+                          className="post-button"
+                          onClick={() => deleteTopic(elm._id)}
+                        >
+                          <img
+                            src={deleteIcon}
+                            alt="delete"
+                            width="24"
+                            height="24"
+                          />
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    );
+    return body;
+  };
 
   return (
     <>
@@ -108,7 +117,7 @@ function TopicListPage(props) {
             <Spinner animation="border" variant="info" />
           </div>
         )}
-        {props.topics.length > 0 && <>{body}</>}
+        {props.topics.length > 0 && <>{renderTopics()}</>}
       </section>
     </>
   );

@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     getAllTopics();
-    getAllLesson();
+    getAllLessons();
   }, []);
 
   const getAllTopics = () => {
@@ -36,7 +36,7 @@ function App() {
       );
   };
 
-  const getAllLesson = () => {
+  const getAllLessons = () => {
     const storedToken = localStorage.getItem("authToken");
     axios
       .get(`${process.env.REACT_APP_API_URL}/lessons`, {
