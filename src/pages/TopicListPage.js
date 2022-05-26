@@ -36,19 +36,19 @@ function TopicListPage(props) {
 
   const renderTopics = () => {
     const body = (
-      <Container className="mt-4">
+      <Container className="mt-4 ">
         <h1 className="mb-3 font-linkListTopic ">LIST OF YOUR TOPICS</h1>
         <Row>
           {props.topics.map((elm) => (
             <Col key={elm._id} className="my-2" xs lg="3">
-              <Card className="shadow" border="success">
+              <Card className="shadow w-100 p-3" border="success">
                 <Card.Body className="p-3">
                   <Card.Title>
                     <p className="post-title">{elm.title}</p>
                   </Card.Title>
                   <Card.Text>
-                    <Row className="cols-md-4 mt-3 ml-5">
-                      <Col className="text-right col col-lg-4">
+                    <Row className="cols-md-4 mt-3">
+                      <Col className="text-right col-4">
                         <Nav.Link
                           className="post-button"
                           to={`/topics/${elm._id}`}
@@ -58,7 +58,7 @@ function TopicListPage(props) {
                         </Nav.Link>
                       </Col>
 
-                      <Col className="text-right col col-lg-4">
+                      <Col className="text-right col-4">
                         <Nav.Link
                           className="post-button"
                           to={`/topics/${elm._id}/edit`}
@@ -73,7 +73,7 @@ function TopicListPage(props) {
                         </Nav.Link>
                       </Col>
 
-                      <Col className="text-right col col-lg-4">
+                      <Col className="text-right col-4">
                         <Button
                           className="post-button"
                           onClick={() => deleteTopic(elm._id)}
@@ -106,11 +106,11 @@ function TopicListPage(props) {
         {props.topics.length === 0 && (
           <>
             <Card className="text-center mx-5 my-5">
-              <Card.Header as="h1">Hi </Card.Header>
+              <Card.Header as="h1">Hi !</Card.Header>
               <Card.Body>
                 <Card.Title>Welcome to Learned Dashboard</Card.Title>
                 <Card.Text>
-                  Click the link below to track your first skill to learn
+                  Click the link below to track your first topic to learn
                 </Card.Text>
                 <Nav.Link
                   className="btn-floating"

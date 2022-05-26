@@ -4,14 +4,20 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
+import { useEffect } from "react";
 
 function AddLessonPage(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState([]);
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    props.updateTopic();
+  }, [user]);
 
   const [show, setShow] = useState(false);
 
@@ -22,17 +28,26 @@ function AddLessonPage(props) {
     e.preventDefault();
 
     const { topicId } = props;
-    const requestBody = { title, description, url, status, topicId };
 
+    const requestBody = { title, description, url, status, topic: topicId };
+
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .post(`${process.env.REACT_APP_API_URL}/lessons`, requestBody)
+      .post(`${process.env.REACT_APP_API_URL}/lessons`, requestBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
+        //reset form
         setTitle("");
         setDescription("");
         setUrl("");
         setStatus("");
+
+        //update state
         props.updateTopic();
-        // navigate(`/topics/${topicId}`);
+
+        //close modal
+        handleClose();
       })
       .catch((error) => console.log(error));
   };
@@ -48,7 +63,7 @@ function AddLessonPage(props) {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>What do you want to learn?</Modal.Title>
         </Modal.Header>
         <Form className="my-4" onSubmit={handleSubmit}>
@@ -62,9 +77,6 @@ function AddLessonPage(props) {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <Form.Text id="title-help" muted>
-                Required
-              </Form.Text>
             </Form.Group>
             <Form.Group className="my-3">
               <Form.Label>Description</Form.Label>
@@ -72,18 +84,17 @@ function AddLessonPage(props) {
                 as="textarea"
                 rows={3}
                 name="description"
+                required={true}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
-              <Form.Text id="title-help" muted>
-                Required
-              </Form.Text>
             </Form.Group>
             <Form.Group className="my-2">
               <Form.Label>URL</Form.Label>
               <Form.Control
                 type="text"
                 name="url"
+                required={true}
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
               />
@@ -94,6 +105,7 @@ function AddLessonPage(props) {
               <Form.Control
                 as="select"
                 value={status}
+                required={true}
                 name="status"
                 onChange={(e) => setStatus(e.target.value)}
               >
@@ -109,8 +121,8 @@ function AddLessonPage(props) {
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="primary" type="submit" onClick={handleClose}>
-              Creat !
+            <Button variant="primary" type="submit">
+              Create !
             </Button>
           </Modal.Footer>
         </Form>

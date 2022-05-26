@@ -23,8 +23,11 @@ function EditLessonPage(props) {
   const [status, setStatus] = useState([]);
 
   useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${process.env.REACT_APP_API_URL}/lessons/${lessonId}`)
+      .get(`${process.env.REACT_APP_API_URL}/lessons/${lessonId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         // console.log(response.data);
         setTitle(response.data.title);
@@ -38,11 +41,14 @@ function EditLessonPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newLessonUpdate = { title, description, url, status };
-
+    const storedToken = localStorage.getItem("authToken");
     axios
       .put(
         `${process.env.REACT_APP_API_URL}/lessons/${lessonId}`,
-        newLessonUpdate
+        newLessonUpdate,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
       )
       .then((response) => {
         console.log(response.data);

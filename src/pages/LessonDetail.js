@@ -11,8 +11,11 @@ import Button from "react-bootstrap/esm/Button";
 
 function LessonDetail(props) {
   const deleteLesson = (lessonId) => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/lessons/${lessonId}`)
+      .delete(`${process.env.REACT_APP_API_URL}/lessons/${lessonId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         props.updateTopic();
       })

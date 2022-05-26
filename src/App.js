@@ -90,7 +90,11 @@ function App() {
           path="/topics/:topicId"
           element={
             <IsPrivate>
-              <TopicDetailsPage topics={topics} lessons={lessons} />
+              <TopicDetailsPage
+                topics={topics}
+                lessons={lessons}
+                callbackUpdateTopicList={getAllTopics}
+              />
             </IsPrivate>
           }
         />
