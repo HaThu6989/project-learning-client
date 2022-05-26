@@ -97,7 +97,11 @@ function App() {
 
         <Route
           path="/lessons/:lessonId/edit"
-          element={<EditLessonPage topics={topics} lessons={lessons} />}
+          element={
+            <IsPrivate>
+              <EditLessonPage topics={topics} lessons={lessons} />
+            </IsPrivate>
+          }
         />
 
         <Route path="/signup" element={<SignupPage />} />
