@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
@@ -38,8 +39,8 @@ function SignupPage(props) {
             <h1 className="display-4"> BY YOUR WAY</h1>
             <h2 className="text-info">Keep track of what you are learning</h2>
           </div>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <Form className="my-4" onSubmit={handleSignupSubmit}>
+          {errorMessage && <Alert className="my-3">{errorMessage}</Alert>}
+          <Form onSubmit={handleSignupSubmit}>
             <Form.Group className="my-4">
               <Form.Control
                 type="email"

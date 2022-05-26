@@ -4,6 +4,7 @@ import { AuthContext } from "../context/auth.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import logoutIcon from "../assets/logout.svg";
+import logo from "../assets/logo.svg";
 import Button from "react-bootstrap/Button";
 
 function NavbarMenu() {
@@ -11,17 +12,25 @@ function NavbarMenu() {
 
   return (
     <Navbar expand="lg" bg="primary" variant="dark" className="shadow">
-      <Navbar.Brand className="font-weight-bolder text-light">
-        LEARNER DASHBOARD
+      <Navbar.Brand className="mr-auto">
+        <Nav.Link
+          className="font-weight-bolder text-dark mt-1"
+          to="/"
+          as={Link}
+        >
+          <img
+            src="https://img.icons8.com/bubbles/50/000000/bbb.png"
+            alt="learnItLogo"
+            className="mr-2 "
+          />
+          LEARNER DASHBOARD
+        </Nav.Link>
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link className="font-weight-bolder text-white" to="/" as={Link}>
-            Home
-          </Nav.Link>
           <Nav.Link
             className="font-weight-bolder text-white"
             to="/topics"

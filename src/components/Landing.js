@@ -30,7 +30,7 @@ function Landing() {
             </p>
             <p>
               <strong> Please note</strong>: Learners will only see the tabs and
-              sections as applicable to them and their institution.{" "}
+              sections as applicable to them.{" "}
             </p>
           </Col>
         </Row>

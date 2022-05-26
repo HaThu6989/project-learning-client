@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 
 import { AuthContext } from "../context/auth.context";
 import NavbarMenu from "../components/NavbarMenu";
@@ -48,8 +49,8 @@ function LoginPage() {
             <h1 className="display-4"> BY YOUR WAY</h1>
             <h2 className="text-info">Keep track of what you are learning</h2>
           </div>
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-          <Form className="my-4" onSubmit={handleLoginSubmit}>
+          {errorMessage && <Alert className="my-3">{errorMessage}</Alert>}
+          <Form onSubmit={handleLoginSubmit}>
             <Form.Group className="my-4">
               <Form.Control
                 type="email"
