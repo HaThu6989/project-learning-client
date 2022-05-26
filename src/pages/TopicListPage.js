@@ -11,11 +11,23 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import editIcon from "../../src/assets/pencil.svg";
 import deleteIcon from "../../src/assets/trash.svg";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 function TopicListPage(props) {
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    props.callbackUpdateTopicList();
+  }, [user]);
+
   const deleteTopic = (topicId) => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/topics/${topicId}`)
+      .delete(`${process.env.REACT_APP_API_URL}/topics/${topicId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then(() => {
         props.callbackUpdateTopicList();
       })
@@ -23,7 +35,6 @@ function TopicListPage(props) {
   };
 
   const renderTopics = () => {
-    props.callbackUpdateTopicList();
     const body = (
       <Container className="mt-4">
         <h1 className="mb-3 font-linkListTopic ">LIST OF YOUR TOPICS</h1>
@@ -112,7 +123,7 @@ function TopicListPage(props) {
             </Card>
           </>
         )}
-        {props.topics.length === null && (
+        {props.topics === null && (
           <div className="spinner-container">
             <Spinner animation="border" variant="info" />
           </div>

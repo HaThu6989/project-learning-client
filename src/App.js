@@ -88,7 +88,11 @@ function App() {
 
         <Route
           path="/topics/:topicId"
-          element={<TopicDetailsPage topics={topics} lessons={lessons} />}
+          element={
+            <IsPrivate>
+              <TopicDetailsPage topics={topics} lessons={lessons} />
+            </IsPrivate>
+          }
         />
 
         <Route

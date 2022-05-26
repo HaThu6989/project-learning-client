@@ -19,8 +19,11 @@ function TopicDetailsPage(props) {
   };
 
   const getOneTopic = () => {
+    const storedToken = localStorage.getItem("authToken");
     axios
-      .get(`${process.env.REACT_APP_API_URL}/topics/${topicId}`)
+      .get(`${process.env.REACT_APP_API_URL}/topics/${topicId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
       .then((response) => {
         const oneTopic = response.data;
         setTopic(oneTopic);
