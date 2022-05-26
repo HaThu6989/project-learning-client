@@ -62,7 +62,6 @@ function AddTopicPage(props) {
                   <Form.Control
                     as="textarea"
                     rows={3}
-                    placeholder="Description"
                     name="description"
                     value={description}
                     required={true}
@@ -74,9 +73,6 @@ function AddTopicPage(props) {
                 </Button>
               </Form>
             </Card.Text>
-            {/* <Button variant="primary" type="submit">
-              Create !
-            </Button> */}
           </Card.Body>
         </Card>
       </Container>

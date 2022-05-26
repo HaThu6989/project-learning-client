@@ -53,33 +53,36 @@ function AddLessonPage(props) {
         </Modal.Header>
         <Form className="my-4" onSubmit={handleSubmit}>
           <Modal.Body>
-            <Form.Group className="my-2">
+            <Form.Group className="my-3">
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Title"
                 name="title"
                 required={true}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
+              <Form.Text id="title-help" muted>
+                Required
+              </Form.Text>
             </Form.Group>
-            <Form.Group className="my-2">
+            <Form.Group className="my-3">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Description"
                 name="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
+              <Form.Text id="title-help" muted>
+                Required
+              </Form.Text>
             </Form.Group>
             <Form.Group className="my-2">
               <Form.Label>URL</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Youtube Tutorial URL"
                 name="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
