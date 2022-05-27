@@ -4,14 +4,13 @@ import { AuthContext } from "../context/auth.context";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import logoutIcon from "../assets/logout.svg";
-import logo from "../assets/logo.svg";
 import Button from "react-bootstrap/Button";
 
 function NavbarMenu() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
-    <Navbar expand="lg" bg="primary" variant="dark" className="shadow">
+    <Navbar expand="lg" bg="primary" variant="dark" className="shadow p-1">
       <Navbar.Brand className="mr-auto">
         <Nav.Link
           className="font-weight-bolder text-dark mt-1"
